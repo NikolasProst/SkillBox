@@ -1,9 +1,11 @@
 package main.model;
 
-import org.springframework.data.repository.cdi.Eager;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "Tag2Posts")
 public class Tag2Post {
@@ -15,28 +17,4 @@ public class Tag2Post {
     private int postId;
     @Column(name = "tagId", nullable = false)
     private int tagId;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public int getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(int tagId) {
-        this.tagId = tagId;
-    }
 }
