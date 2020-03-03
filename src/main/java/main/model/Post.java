@@ -2,6 +2,7 @@ package main.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import main.enums.ModerationStatus;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,14 +28,9 @@ public class Post {
     private Date time;
     @Column(name = "title", nullable = false, length = 255)
     private String title;
-    @Column(name = "test", nullable = false)
-    private String test;
+    @Column(name = "text", nullable = false)
+    private String text;
     @Column(name = "viewCount", nullable = false)
     private int viewCount;
 
-    public enum ModerationStatus {
-        NEW,
-        ACCEPTED,
-        DECLINED
-    }
 }
