@@ -18,6 +18,6 @@ public class CaptchaCode {
     private Date time;
     @Column(name = "code", nullable = false)
     private  String code;
-    @Column(name = "secretCode", nullable = false)
+    @Column(name = "secret_code", nullable = false)
     private String secretCode;
 }

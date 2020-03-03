@@ -14,9 +14,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private int id;
-    @Column(name = "isModerator",nullable = false)
+    @Column(name = "is_moderator",nullable = false)
     private boolean isModerator;
-    @Column(name = "regTime",nullable = false)
+    @Column(name = "reg_time",nullable = false)
     private Date regTime;
     @Column(name = "name",nullable = false)
     private String name;

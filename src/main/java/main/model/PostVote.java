@@ -14,9 +14,9 @@ public class PostVote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private int id;
-    @Column(name = "userId", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private int userId;
-    @Column(name = "postId", nullable = false)
+    @Column(name = "post_id", nullable = false)
     private int postId;
     @Column(name = "time", nullable = false)
     private Date time;

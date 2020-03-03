@@ -1,13 +1,9 @@
-package main;
+package main.response;
 
 import lombok.Data;
-import main.model.Post;
 
 @Data
 public class PostResponse {
     private int count;
-    private Post post;
-
-
-
+    private PostsResponse posts;
 }

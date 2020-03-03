@@ -15,14 +15,14 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private int id;
-    @Column(name = "isActive", nullable = false)
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
     @Enumerated(EnumType.STRING)
-    @Column(name = "moderationStatus", nullable = false)
+    @Column(name = "moderation_status", nullable = false)
     private ModerationStatus moderationStatus;
-    @Column(name = "moderatorId",nullable = true)
+    @Column(name = "moderator_id",nullable = true)
     private int moderatorId;
-    @Column(name = "userId", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private int userId;
     @Column(name = "time", nullable = false)
     private Date time;
@@ -30,7 +30,7 @@ public class Post {
     private String title;
     @Column(name = "text", nullable = false)
     private String text;
-    @Column(name = "viewCount", nullable = false)
+    @Column(name = "view_count", nullable = false)
     private int viewCount;
 
 }

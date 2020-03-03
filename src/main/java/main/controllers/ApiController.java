@@ -1,10 +1,7 @@
 package main.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import main.GeneralInfo;
-import main.enums.PostViewMode;
+import main.response.GeneralInfo;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
