@@ -1,6 +1,4 @@
 package main.model;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +6,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "CaptchaCodes")
+@Table(name = "captcha_codes")
 public class CaptchaCode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

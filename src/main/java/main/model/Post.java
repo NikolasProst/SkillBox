@@ -1,6 +1,4 @@
 package main.model;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import main.enums.ModerationStatus;
 

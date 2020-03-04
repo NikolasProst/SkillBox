@@ -1,13 +1,11 @@
 package main.model;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "GlobalSettings")
+@Table(name = "global_settings")
 public class GlobalSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,6 +1,4 @@
 package main.model;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +6,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "postVotes")
+@Table(name = "post_votes")
 public class PostVote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
