@@ -1,4 +1,4 @@
-package main.response;
+package main.DTO;
 
 import lombok.Data;
 import main.model.Post;
@@ -6,10 +6,10 @@ import main.model.Post;
 import java.util.Date;
 
 @Data
-public class PostsResponse {
+public class PostDTO {
     private int id;
     private Date time;
-    private UserResponse user;
+    private UserDTO user;
     private String title;
     private String announce;
     private int likeCount;
@@ -17,10 +17,10 @@ public class PostsResponse {
     private int commentCount;
     private int viewCount;
 
-    public PostsResponse(Post post, int likeCount, int dislikeCount, int commentCount) {
+    public PostDTO(Post post, int likeCount, int dislikeCount, int commentCount) {
         this.id = post.getId();
         this.time = post.getTime();
-        this.user = new UserResponse(post.getUserId());
+        this.user = new UserDTO(post.getAuthor().getId());
         this.title = post.getTitle();
         this.announce = post.getText().substring(0, 50);
         this.likeCount = likeCount;

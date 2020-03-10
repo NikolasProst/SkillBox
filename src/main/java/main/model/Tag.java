@@ -10,6 +10,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private int id;
+
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 }

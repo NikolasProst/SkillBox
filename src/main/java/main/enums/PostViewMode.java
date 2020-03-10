@@ -1,7 +1,5 @@
 package main.enums;
 
-import java.io.ObjectInputFilter;
-
 public enum PostViewMode {
     RECENT("recent"),
     POPULAR("popular"),

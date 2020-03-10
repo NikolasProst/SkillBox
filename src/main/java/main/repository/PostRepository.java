@@ -1,6 +1,9 @@
 package main.repository;
 
+import main.DTO.PostDTO;
 import main.model.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,5 +28,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     String fullQuery = query + where + group;
 
     @Query(fullQuery)
-    List<Post> find(@Param("data")Instant date);
+    Page<PostDTO> findAll(@Param("data")Instant date, Pageable pageable);
+
 }

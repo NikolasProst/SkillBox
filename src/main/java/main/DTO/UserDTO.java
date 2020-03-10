@@ -1,16 +1,16 @@
-package main.response;
+package main.DTO;
 
 import lombok.Data;
 import main.services.UserService;
 
 @Data
-public class UserResponse {
+public class UserDTO {
     private UserService userService;
 
     private int id;
     private String name;
 
-    public UserResponse(int id) {
+    public UserDTO(int id) {
         this.id = id;
         this.name = userService.getUserNameById(id);
     }

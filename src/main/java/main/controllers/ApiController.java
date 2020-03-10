@@ -1,6 +1,6 @@
 package main.controllers;
 
-import main.response.GeneralInfo;
+import main.DTO.GeneralInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public class ApiController {
         return new ResponseEntity(new GeneralInfo("DevPub",
                 "Рассказы разработчиков",
                 "+7 910 231-57-06",
-                "ramanik32@mail.com",
+                "ramanik32@gmail.com",
                 "Ромашов Николай",
                 "2020"),
                 HttpStatus.OK);
