@@ -21,13 +21,15 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     String where = "WHERE p.isActive = 1 " +
             " AND p.moderationStatus = 'ACCEPTED' " +
-            " AND p.time <= :data";
+            " AND p.time <= :date";
 
     String group = " GROUP BY p.id";
 
     String fullQuery = query + where + group;
 
     @Query(fullQuery)
-    Page<PostDTO> findAll(@Param("data")Instant date, Pageable pageable);
+    Page<PostDTO> findAll(@Param("date")Instant date, Pageable pageable);
 
+    @Query("SELECT p FROM Post p " + where + " AND (p.title LIKE %:query% OR p.text LIKE %:query%) GROUP BY p.id")
+    Page<PostDTO> findAllByQuery(@Param("date")Instant date, @Param("query") String query, Pageable pageable);
 }

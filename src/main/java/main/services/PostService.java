@@ -27,7 +27,6 @@ public class PostService {
 
     public ResponseEntity getAll(int offset, int limit, String mode) {
         PostViewMode viewMode = null;
-        Instant today = Instant.now();
         Sort sort = Sort.by(Sort.Direction.DESC, "time");
 
         try {
@@ -53,9 +52,15 @@ public class PostService {
                 break;
         }
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<PostDTO> posts = postRepository.findAll(today, pageable);
+        Page<PostDTO> posts = postRepository.findAll(Instant.now(), pageable);
+        return ResponseEntity.ok(new PostListDTO(posts));
+    }
 
 
+    public ResponseEntity search(int offset, int limit, String query) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "time");
+        Pageable pageable = new PageRequest(offset, limit, sort);
+        Page<PostDTO> posts = postRepository.findAllByQuery(Instant.now(), query, pageable);
         return ResponseEntity.ok(new PostListDTO(posts));
     }
 }
