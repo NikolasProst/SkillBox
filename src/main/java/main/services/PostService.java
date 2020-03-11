@@ -1,23 +1,19 @@
 package main.services;
 
-import main.DTO.PostDTO;
 import main.DTO.PostListDTO;
 import main.PageRequest;
 import main.enums.PostViewMode;
+import main.model.Post;
 import main.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 @Service
 public class PostService {
@@ -52,7 +48,13 @@ public class PostService {
                 break;
         }
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<PostDTO> posts = postRepository.findAll(Instant.now(), pageable);
+        Page<Post> posts = null;
+        if (viewMode == PostViewMode.POPULAR) {
+            posts = postRepository.findAllWithCommentCount(Instant.now(), pageable);
+        }
+        else {
+            posts = postRepository.findAll(Instant.now(), pageable);
+        }
         return ResponseEntity.ok(new PostListDTO(posts));
     }
 
@@ -60,7 +62,7 @@ public class PostService {
     public ResponseEntity search(int offset, int limit, String query) {
         Sort sort = Sort.by(Sort.Direction.DESC, "time");
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<PostDTO> posts = postRepository.findAllByQuery(Instant.now(), query, pageable);
+        Page<Post> posts = postRepository.findAllByQuery(Instant.now(), query, pageable);
         return ResponseEntity.ok(new PostListDTO(posts));
     }
 }
