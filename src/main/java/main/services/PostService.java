@@ -3,7 +3,7 @@ package main.services;
 import main.DTO.PostListDTO;
 import main.PageRequest;
 import main.enums.PostViewMode;
-import main.model.Post;
+import main.model.Posts;
 import main.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,12 +48,12 @@ public class PostService {
                 break;
         }
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<Post> posts = null;
+        Page<Posts> posts = null;
         if (viewMode == PostViewMode.POPULAR) {
-            posts = postRepository.findAllWithCommentCount(Instant.now(), pageable);
+            //posts = postRepository.findAllWithCommentCount(pageable);
         }
         else {
-            posts = postRepository.findAll(Instant.now(), pageable);
+            posts = postRepository.findAll(pageable);
         }
         return ResponseEntity.ok(new PostListDTO(posts));
     }
@@ -62,7 +62,7 @@ public class PostService {
     public ResponseEntity search(int offset, int limit, String query) {
         Sort sort = Sort.by(Sort.Direction.DESC, "time");
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<Post> posts = postRepository.findAllByQuery(Instant.now(), query, pageable);
+        Page<Posts> posts = postRepository.findAllByQuery(query, pageable);
         return ResponseEntity.ok(new PostListDTO(posts));
     }
 }

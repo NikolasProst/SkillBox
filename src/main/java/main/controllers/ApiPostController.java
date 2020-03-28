@@ -15,7 +15,7 @@ public class ApiPostController {
 
     @GetMapping(value = "/")
     public ResponseEntity getPosts(@RequestParam(name = "offset") int offset, @RequestParam(name = "limit") int limit, @RequestParam(name = "mode") String mode) {
-        return postService.getAll(0, 10, "best");
+        return postService.getAll(offset, limit, mode);
     }
 
     @GetMapping(value = "/search/")

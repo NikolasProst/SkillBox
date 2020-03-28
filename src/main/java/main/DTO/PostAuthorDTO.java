@@ -4,13 +4,13 @@ import lombok.Data;
 import main.services.UserService;
 
 @Data
-public class UserDTO {
+public class PostAuthorDTO {
     private UserService userService;
 
     private int id;
     private String name;
 
-    public UserDTO(int id) {
+    public PostAuthorDTO(int id) {
         this.id = id;
         this.name = userService.getUserNameById(id);
     }
