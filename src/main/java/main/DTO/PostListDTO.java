@@ -10,11 +10,11 @@ import java.util.List;
 
 public class PostListDTO {
     @Getter
-    @JsonView(JsonViews.idPost.class)
+    @JsonView(JsonViews.post.class)
     private final long count;
 
     @Getter @Setter
-    @JsonView(JsonViews.idPost.class)
+    @JsonView(JsonViews.post.class)
     private List<PostsDTO> posts;
 
     public PostListDTO(Page posts) {
