@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostRepository extends JpaRepository<Posts, Integer> {
+
     String query = "SELECT *" +
             " FROM posts as p";
     String where = " WHERE p.is_active = 1" +

@@ -1,14 +1,11 @@
 package main.model;
-import com.sun.istack.NotNull;
 import lombok.Data;
 import main.enums.ModerationStatus;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -45,8 +42,20 @@ public class Posts {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "view_count" +
-            "", nullable = false)
+    @Column(name = "view_count", nullable = false)
     private int viewCount;
 
+    /** Лайки поста */
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private List<PostVote> postVotes;
+
+    /** Комментарии поста */
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private List<PostComment> postComments;
+
+    public int getCountComments(){ return postComments.size(); }
+
+    public int getLikeCount() {return (int) postVotes.stream().map(v -> v.getValue()).filter(v -> v > 0).count();}
 }

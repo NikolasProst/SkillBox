@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    String nameQuery = "SELECT u.name " +
-            "FROM User u WHERE u.id = :id";
 
-    @Query(nameQuery)
-    String findById(@Param("id") int id);
+    @Query("SELECT name FROM User u WHERE u.id = :id")
+    String findUserNameById(@Param("id") int id);
 }
