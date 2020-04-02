@@ -55,6 +55,12 @@ public class Posts {
     @JoinColumn(name = "post_id")
     private List<PostComment> postComments;
 
+    @ManyToMany
+    @JoinTable(name = "tags",
+            joinColumns = @JoinColumn(name = "post_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName="id"))
+    private List<Tag2Post> postTags;
+
     public int getCountComments(){ return postComments.size(); }
 
     public int getLikeCount() {return (int) postVotes.stream().map(v -> v.getValue()).filter(v -> v > 0).count();}

@@ -29,4 +29,6 @@ public interface PostRepository extends JpaRepository<Posts, Integer> {
 
     @Query(value = "SELECT * FROM Posts " + where + " AND (Posts.title LIKE %:query% OR Posts.text LIKE %:query%)" + group, nativeQuery = true)
     Page<Posts> findAllByQuery(@Param("query") String query, Pageable pageable);
+
+    Posts findById(@Param("id") int id);
 }

@@ -80,6 +80,11 @@ public class PostService {
                 .map(this::convertToDto).collect(Collectors.toList()))));
     }
 
+    public ResponseEntity getPostbyId(int id) {
+        Posts post = postRepository.findById(id);
+        return ResponseEntity.ok(convertToDto(post));
+    }
+
     /**Перевод постов в DTO**/
     private PostsDTO convertToDto(Posts post) {
         PostsDTO postDto = modelMapper.map(post, PostsDTO.class);

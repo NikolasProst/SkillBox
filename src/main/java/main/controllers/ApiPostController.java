@@ -1,17 +1,12 @@
 package main.controllers;
 
-import main.DTO.PostsDTO;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import main.Main;
-import main.model.Posts;
+import main.JsonViews;
 import main.services.PostService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/post")
@@ -29,6 +24,12 @@ public class ApiPostController {
     @GetMapping(value = "/search")
     public ResponseEntity searchPost(@RequestParam(name = "offset") int offset, @RequestParam(name = "limit") int limit, @RequestParam(name = "query") String query) {
         return postService.search(offset, limit, query);
+    }
+
+    @GetMapping(value = "/{id}")
+    @JsonView(JsonViews.idPost.class)
+    public ResponseEntity getPostbyId(@PathVariable int id) {
+        return postService.getPostbyId(id);
     }
 
 }

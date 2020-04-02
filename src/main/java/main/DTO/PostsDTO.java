@@ -1,11 +1,13 @@
 package main.DTO;
 
+
 import lombok.Data;
-import main.model.Posts;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import main.model.PostComment;
+import main.model.Tag;
 
 import java.util.Date;
+
+import java.util.List;
 
 @Data
 public class PostsDTO {
@@ -19,18 +21,8 @@ public class PostsDTO {
     private int commentCount;
     private int viewCount;
 
-//    public PostsDTO(Posts post, int likeCount, int dislikeCount, int commentCount) {
-//        this.id = post.getId();
-//        this.time = post.getTime();
-//        this.user = new PostAuthorDTO(post.getAuthor().getId());
-//        this.title = post.getTitle();
-//        this.announce = Jsoup.clean(post.getText(), Whitelist.none());
-//        this.likeCount = likeCount;
-//        this.dislikeCount = dislikeCount;
-//        this.commentCount = commentCount;
-//        this.viewCount = post.getViewCount();
-//    }
+   private List<PostComment> comments;
+   private List<Tag> tags;
 
-    public PostsDTO() {
-    }
+    public PostsDTO() { }
 }
