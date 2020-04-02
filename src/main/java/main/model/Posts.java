@@ -1,9 +1,14 @@
 package main.model;
+import com.sun.istack.NotNull;
 import lombok.Data;
 import main.enums.ModerationStatus;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -27,7 +32,7 @@ public class Posts {
     private User moderatedBy;
 
     /** Автор поста */
-    @ManyToOne(cascade = CascadeType.MERGE, optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName="id")
     private User author;
 
@@ -40,7 +45,8 @@ public class Posts {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "view_count", nullable = false)
+    @Column(name = "view_count" +
+            "", nullable = false)
     private int viewCount;
 
 }

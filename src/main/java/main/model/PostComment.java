@@ -13,14 +13,20 @@ public class PostComment {
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "parent_id", nullable = true)
-    private int parentId;
+    @ManyToOne
+    @JoinColumn(name="parent_id", nullable = true, referencedColumnName = "id")
+    private PostComment parentComment;
 
-    @Column(name = "post_id", nullable = false)
-    private int postId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="post_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private Posts post;
 
-    @Column(name = "user_id", nullable = false)
-    private int userId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private User user;
+
+    @Column(name = "text", nullable = false)
+    private String text;
 
     @Column(name = "time", nullable = false)
     private Date time;

@@ -11,7 +11,7 @@ public class PostListDTO {
     private final long count;
 
     @Getter @Setter
-    private List posts;
+    private List<PostsDTO> posts;
 
     public PostListDTO(Page posts) {
         this.posts = posts.getContent();

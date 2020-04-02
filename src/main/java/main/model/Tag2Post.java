@@ -12,9 +12,11 @@ public class Tag2Post {
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "post_id", nullable = false)
-    private int postId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="post_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private Posts post;
 
-    @Column(name = "tag_id", nullable = false)
-    private int tagId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="tag_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private Tag tag;
 }

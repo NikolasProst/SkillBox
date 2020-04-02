@@ -1,10 +1,12 @@
 package main.services;
 
 import main.DTO.PostListDTO;
+import main.DTO.PostsDTO;
 import main.PageRequest;
 import main.enums.PostViewMode;
 import main.model.Posts;
 import main.repository.PostRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,14 +14,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     public ResponseEntity getAll(int offset, int limit, String mode) {
         PostViewMode viewMode = null;
@@ -48,14 +52,13 @@ public class PostService {
                 break;
         }
         Pageable pageable = new PageRequest(offset, limit, sort);
-        Page<Posts> posts = null;
+        Page<Posts> posts =  posts = postRepository.findAll(pageable);;
         if (viewMode == PostViewMode.POPULAR) {
-            //posts = postRepository.findAllWithCommentCount(pageable);
+            posts = postRepository.findAllWithCommentCount(pageable);
         }
-        else {
-            posts = postRepository.findAll(pageable);
-        }
-        return ResponseEntity.ok(new PostListDTO(posts));
+        return ResponseEntity.ok(posts.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList()));
     }
 
 
@@ -64,5 +67,10 @@ public class PostService {
         Pageable pageable = new PageRequest(offset, limit, sort);
         Page<Posts> posts = postRepository.findAllByQuery(query, pageable);
         return ResponseEntity.ok(new PostListDTO(posts));
+    }
+
+    private PostsDTO convertToDto(Posts post) {
+        PostsDTO postDto = modelMapper.map(post, PostsDTO.class);
+        return postDto;
     }
 }

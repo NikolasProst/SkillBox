@@ -17,12 +17,14 @@ public class PostVote {
     private int id;
 
     /** тот, кто поставил лайк / дизлайк */
-    @Column(name = "user_id", nullable = false)
-    private int userId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private User user;
 
     /** пост, которому поставлен лайк / дизлайк */
-    @Column(name = "post_id", nullable = false)
-    private int postId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="post_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private Posts post;
 
     /** дата и время лайка / дизлайка */
     @Column(name = "time", nullable = false)
@@ -30,5 +32,5 @@ public class PostVote {
 
     /** лайк или дизлайк: 1 или -1 */
     @Column(name = "value", nullable = false)
-    private boolean value;
+    private int value;
 }
