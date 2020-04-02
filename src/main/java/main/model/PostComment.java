@@ -1,5 +1,7 @@
 package main.model;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import main.JsonViews;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +12,7 @@ import java.util.Date;
 public class PostComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(JsonViews.idPost.class)
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
@@ -23,12 +26,15 @@ public class PostComment {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false, updatable = false)
+    @JsonView(JsonViews.idPost.class)
     private User user;
 
     @Column(name = "text", nullable = false)
+    @JsonView(JsonViews.idPost.class)
     private String text;
 
     @Column(name = "time", nullable = false)
+    @JsonView(JsonViews.idPost.class)
     private Date time;
 
 }
