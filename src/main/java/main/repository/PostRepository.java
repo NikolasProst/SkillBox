@@ -33,4 +33,7 @@ public interface PostRepository extends JpaRepository<Posts, Integer> {
     @Query(value = query + where + " AND DATE_FORMAT(p.time, '%Y-%m-%d') = :date" + group, nativeQuery = true)
     Page<Posts> findAllByTime(@Param("date") String date, Pageable pageable);
 
+    @Query(value = query + " JOIN p.tags t " + where + " AND t = :tag " + group, nativeQuery = true)
+    Page<Posts> findAllByTag(@Param("tag") String tag, Pageable pageable);
+
 }

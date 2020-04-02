@@ -41,4 +41,10 @@ public class ApiPostController {
         return postService.getPostsByDate(offset, limit, date);
     }
 
+    @GetMapping(value = "/byTag")
+    @JsonView(JsonViews.post.class)
+    public ResponseEntity getPostsByTag(@RequestParam(name = "offset") int offset, @RequestParam(name = "limit") int limit, @RequestParam(name = "date") String tag) {
+        return postService.getPostsByDate(offset, limit, tag);
+    }
+
 }

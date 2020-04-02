@@ -95,6 +95,15 @@ public class PostService {
                 .map(this::convertToDto).collect(Collectors.toList()))));
     }
 
+    /** Поиск постов по тэгу */
+    public ResponseEntity getPostsByTag(int offset, int limit, String tag) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "time");
+        Pageable pageable = new PageRequest(offset, limit, sort);
+        Page<Posts> posts = postRepository.findAllByTag(tag, pageable);
+        return ResponseEntity.ok(new PostListDTO(new PageImpl(posts.stream()
+                .map(this::convertToDto).collect(Collectors.toList()))));
+    }
+
     /**Перевод постов в DTO**/
     private PostsDTO convertToDto(Posts post) {
         PostsDTO postDto = modelMapper.map(post, PostsDTO.class);
