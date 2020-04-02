@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface PostRepository extends JpaRepository<Posts, Integer> {
 
@@ -24,11 +25,12 @@ public interface PostRepository extends JpaRepository<Posts, Integer> {
     @Query(value = fullQuery, nativeQuery = true)
     Page<Posts> findAll(Pageable pageable);
 
-    @Query(value ="SELECT * FROM Posts LEFT JOIN Post_comment ON Posts.id = Post_comment.post_id" + where + group, nativeQuery = true)
-    Page<Posts> findAllWithCommentCount(Pageable pageable);
-
     @Query(value = "SELECT * FROM Posts " + where + " AND (Posts.title LIKE %:query% OR Posts.text LIKE %:query%)" + group, nativeQuery = true)
     Page<Posts> findAllByQuery(@Param("query") String query, Pageable pageable);
 
     Posts findById(@Param("id") int id);
+
+    @Query(value = query + where + " AND DATE_FORMAT(p.time, '%Y-%m-%d') = :date" + group, nativeQuery = true)
+    Page<Posts> findAllByTime(@Param("date") String date, Pageable pageable);
+
 }

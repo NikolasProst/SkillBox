@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/post")
 public class ApiPostController {
@@ -32,6 +33,12 @@ public class ApiPostController {
     @JsonView(JsonViews.idPost.class)
     public ResponseEntity getPostbyId(@PathVariable int id) {
         return postService.getPostbyId(id);
+    }
+
+    @GetMapping(value = "/byDate")
+    @JsonView(JsonViews.post.class)
+    public ResponseEntity getPostsByDate(@RequestParam(name = "offset") int offset, @RequestParam(name = "limit") int limit, @RequestParam(name = "date") String date) {
+        return postService.getPostsByDate(offset, limit, date);
     }
 
 }

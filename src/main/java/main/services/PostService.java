@@ -80,9 +80,19 @@ public class PostService {
                 .map(this::convertToDto).collect(Collectors.toList()))));
     }
 
+    /** Получение конкретного поста */
     public ResponseEntity getPostbyId(int id) {
         Posts post = postRepository.findById(id);
         return ResponseEntity.ok(convertToDto(post));
+    }
+
+    /** Поиск постов по дате */
+    public ResponseEntity getPostsByDate(int offset, int limit, String date) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "time");
+        Pageable pageable = new PageRequest(offset, limit, sort);
+        Page<Posts> posts = postRepository.findAllByTime(date, pageable);
+        return ResponseEntity.ok(new PostListDTO(new PageImpl(posts.stream()
+                .map(this::convertToDto).collect(Collectors.toList()))));
     }
 
     /**Перевод постов в DTO**/
