@@ -52,7 +52,7 @@ public class PostService {
             case EARLY:
                 /** сначала старые */
                 posts = new PageImpl(posts.stream()
-                        .sorted(Comparator.comparing(Posts::getTime).reversed())
+                        .sorted(Comparator.comparing(Posts::getTime))
                         .collect(Collectors.toList()));
                 break;
             case RECENT:
