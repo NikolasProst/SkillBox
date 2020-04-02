@@ -1,5 +1,6 @@
 package main;
 
 public class JsonViews {
-    public class idPost{}
+    public class post {}
+    public class idPost extends post{}
 }

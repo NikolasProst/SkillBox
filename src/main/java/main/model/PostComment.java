@@ -12,8 +12,8 @@ import java.util.Date;
 public class PostComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(JsonViews.idPost.class)
     @Column(name = "id", nullable = false, unique = true)
+    @JsonView(JsonViews.post.class)
     private int id;
 
     @ManyToOne
@@ -26,15 +26,15 @@ public class PostComment {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false, updatable = false)
-    @JsonView(JsonViews.idPost.class)
+    @JsonView(JsonViews.post.class)
     private User user;
 
     @Column(name = "text", nullable = false)
-    @JsonView(JsonViews.idPost.class)
+    @JsonView(JsonViews.post.class)
     private String text;
 
     @Column(name = "time", nullable = false)
-    @JsonView(JsonViews.idPost.class)
+    @JsonView(JsonViews.post.class)
     private Date time;
 
 }
