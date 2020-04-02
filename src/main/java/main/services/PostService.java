@@ -9,6 +9,7 @@ import main.repository.PostRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -56,9 +57,8 @@ public class PostService {
         if (viewMode == PostViewMode.POPULAR) {
             posts = postRepository.findAllWithCommentCount(pageable);
         }
-        return ResponseEntity.ok(posts.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(new PostListDTO(new PageImpl(posts.stream()
+                .map(this::convertToDto).collect(Collectors.toList()))));
     }
 
 
